@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add a Race</title>
+    <link rel="stylesheet" href="main.css"></link>
+    <link rel="stylesheet" href="addPeople.css"></link>
+</head>
+<body>
+    <div class="container">
+        <div class="flex-center flex-column">
+            <h1>DB Config Creator</h1>
+            <div class="input-container">
+                <label class="input-question">Distance:</label>
+                <form>
+                    <input
+                    type="text"
+                    class="input-text"
+                    id="distance"
+                    placeholder="e.g. 200m"
+                    autofocus
+                    />
+                </form>
+            </div>
+            <div class="input-container">
+                <label class="input-question">Age Group:</label>
+                <form>
+                    <input
+                    type="text"
+                    class="input-text"
+                    id="age"
+                    placeholder="e.g. Junior"
+                    />
+                </form>
+            </div>
+            <div class="input-container">
+                <label class="input-question">Gender:</label>
+                <form>
+                    <input
+                    type="text"
+                    class="input-text"
+                    id="gender"
+                    placeholder="e.g. Opens"
+                    />
+                </form>
+            </div>
+            <div class="input-container">
+                <label class="input-question">Race Type:</label>
+                <form>
+                    <input
+                    type="text"
+                    class="input-text"
+                    id="raceType"
+                    placeholder="e.g. Heat 1, Finals"
+                    />
+                </form>
+            </div>
+            <div class="input-container">
+                <label class="input-question">Boat Size:</label>
+                <div class="input-text">
+                <label class="input-question-gender">20s
+                    <input type="radio" name="radio" id="20sRadio">
+                    <span class="checkmark"></span>
+                </label>
+                <label class="input-question-gender">10s
+                    <input type="radio" name="radio" id="10sRadio">
+                    <span class="checkmark"></span>
+                </label>
+                </div>
+            </div>
+            <button
+                type="submit"
+                class="btn"
+                id="addRaceBtn"
+                onclick="addRaceBtn(event)"
+            >Add Race
+            </button>
+        </div>
+    </div>
+    <script src="races.js"></script>
+</body>
+</html>
