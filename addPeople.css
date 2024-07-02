@@ -43,7 +43,7 @@ input[type="text"] {
     padding: 1.5rem;
     border: none;
     font-size: 1.5rem;
-    box-sizing: border-box;
+    width: 15rem;
 }
 
 input::placeholder {
@@ -118,4 +118,32 @@ input[type="radio"] {
 .deleteGuyBtn:hover {
     box-shadow: 0 0.5rem 1rem 0 rgba(86, 185, 235, 0.5);
     transition: box-shadow 100ms;
+}
+
+@media only screen and (max-width:600px) {
+    table, th, td {
+        font-size: 3vw;
+        min-width: 3vw;
+    }
+    .deleteGuyBtn {
+        font-size: 3vw;
+    }
+    label[class="input-question"] {
+        font-size: 1rem;
+        padding: 1.25rem;
+    }
+    input[type="text"] {
+        font-size: 1rem;
+        padding: 1.25rem;
+        width:40vw;
+    }
+    .input-container {
+        width: 80vw;
+    }
+    .input-question-gender {
+        font-size: 1rem;
+    }
+    .checkmark {
+        top: -0.5rem;
+    }
 }

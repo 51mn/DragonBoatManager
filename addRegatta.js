@@ -14,11 +14,9 @@ listRegattas = (i) => {
     divNode = document.createElement("div");
     document.getElementById('regattaList').appendChild(divNode); 
     divNode.classList.add('box-box-box');
-    regattaAdded = divNode.appendChild(document.createElement("button"));
-    regattaAdded.textContent = raceList[i]["regatta"];
-    regattaAdded.classList.add('not-button-button');
-    regattaAdded.setAttribute("regattaSelected",i);
-    regattaAdded.setAttribute("onclick","regattaClicked(event)")
+    divNode.setAttribute("onclick","regattaClicked(event)")
+    divNode.textContent = raceList[i]["regatta"];
+    divNode.setAttribute("regattaSelected",i);
     deleteBtn = divNode.appendChild(document.createElement("button"));
     deleteBtn.classList.add('delete-button');
     deleteBtn.setAttribute("onclick","deleteRegattaBtn(event)");
@@ -48,5 +46,3 @@ addRegattaBtn = () => {
     listRegattas(i);
     document.getElementById('regattaName').value = "";
 };
-
-//raceList = [{regattaName:regatta, races:[{gender:opens, size:10, age:junior, distance:200m, people:[0,3,7,1,5,9,2,4,8,6]},{gender:opens, size:20, age:junior, distance:200m, people:[0,3,7,1,5,9,2,4,8,6]}]}]

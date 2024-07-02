@@ -25,16 +25,14 @@ listRaces = (i) => {
     divNode = document.createElement("div");
     document.getElementById('raceList').appendChild(divNode); 
     divNode.classList.add('box-box-box');
-    raceAdded = divNode.appendChild(document.createElement("button"));
-    raceAdded.classList.add('not-button-button');
-    raceAdded.textContent = 
+    divNode.textContent = 
     raceList[regattaSelected]["races"][i]["distance"].concat(
         " | ",raceList[regattaSelected]["races"][i]["age"],
         " | ",raceList[regattaSelected]["races"][i]["gender"],
         " | ",raceList[regattaSelected]["races"][i]["twentyRadio"],
         " | ",raceList[regattaSelected]["races"][i]["raceType"]);
-    raceAdded.setAttribute("raceSelected",i)
-    raceAdded.setAttribute("onclick","raceClicked(event)")
+    divNode.setAttribute("raceSelected",i)
+    divNode.setAttribute("onclick","raceClicked(event)")
     deleteBtn = divNode.appendChild(document.createElement("button"));
     deleteBtn.classList.add('delete-button');
     deleteBtn.setAttribute("raceNum",i);

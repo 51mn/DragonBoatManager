@@ -39,8 +39,8 @@ button {
 }
 
 .addPersonBtn {
-    min-width: 18rem; 
-    width: 100%; 
+    width: 25vw;
+    max-width: 18rem;
     height: 4rem; 
     padding: 1rem; 
     margin-bottom: 0;
@@ -104,4 +104,20 @@ button:hover {
     text-align: center;
     color: #56a5eb;
     font-size: 1.5rem;
+}
+
+@media only screen and (max-width:900px) {
+    .hold-that-shit {
+        flex-direction: column;
+    }
+    .addPersonBtn {
+        width: 40vw;
+        font-size: 1.3rem;
+    } 
+}
+
+@media only screen and (max-width:600px) {
+    .addPersonBtn {
+        font-size: 3.5vw;
+    }  
 }
