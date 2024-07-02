@@ -25,7 +25,6 @@ onLoadFunction = () => {
 };
 
 deleteGuyBtn = (e) => {
-    console.log(e.target.getAttribute("guyNum"));
     i = e.target.getAttribute("guyNum");
     peopleList.splice(i,1);
     localStorage.setItem('peopleList',JSON.stringify(peopleList));

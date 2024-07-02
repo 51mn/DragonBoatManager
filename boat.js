@@ -8,7 +8,7 @@ addPersonBtnf = (e) => {
     if (e.target.nextSibling.style.display == 'block') {
         e.target.nextSibling.style.display = 'none';
     } else {
-        for (i = 0; i < boatSize; i++) {
+        for (i = 0; i < boatSize+2; i++) {
             document.getElementsByClassName('searchPersonContainer')[i].style.display = 'none';
         }
         e.target.nextSibling.style.display = 'block';
@@ -38,7 +38,7 @@ addGuyFnctn = () => {
     addPersonBtn.id = "addPersonBtn";
     addPersonBtn.setAttribute('onclick','addPersonBtnf(event)');
     addPersonBtn.innerText = 
-    (raceList[regattaSelected]["races"][raceSelected]["people"][seatNum] == null) ? ("+") : displayName(seatNum);
+    (peopleInRace()[seatNum] == null) ? ("+") : displayName(seatNum);
     addPersonContainer.appendChild(addPersonBtn);
     
     searchPersonContainer = document.createElement('div');
@@ -75,54 +75,82 @@ boatOnLoad = () => {
         addGuyFnctn()
         document.getElementById('dANDsContainer').appendChild(addPersonContainer)
     };
+    updateStats();
 };
 
 personClicked = (e) => {
     seatNum = e.target.parentElement.parentElement.getAttribute('seatNum');
     personSelected = peopleList[e.target.getAttribute('personNum')];
-    for (i=0;i<2;i++) {
-        if (JSON.stringify(personSelected) === JSON.stringify(raceList[regattaSelected]["races"][raceSelected]["people"][i])) {
-            raceList[regattaSelected]["races"][raceSelected]["people"][i] = null;
-            document.getElementsByClassName('addPersonContainer')[i].firstChild.textContent="+";
+    for (i=0;i<boatSize+2;i++) {
+        if (JSON.stringify(personSelected) === JSON.stringify(peopleInRace()[i])) {
+            peopleInRace()[i] = null;
+            document.getElementsByClassName('addPersonContainer')[(i>1) ? (i-2) : (boatSize==20 ? i+20 : i+10)].firstChild.textContent="+";
         };
     };
-    for (i=2;i<boatSize;i++) {
-        if (JSON.stringify(personSelected) === JSON.stringify(raceList[regattaSelected]["races"][raceSelected]["people"][i])) {
-            raceList[regattaSelected]["races"][raceSelected]["people"][i] = null;
-            document.getElementsByClassName('addPersonContainer')[i-2].firstChild.textContent="+";
-        };
-    };
-    raceList[regattaSelected]["races"][raceSelected]["people"][seatNum] = personSelected;
+    peopleInRace()[seatNum] = personSelected;
     e.target.parentElement.parentElement.parentElement.previousSibling.textContent = displayName(seatNum);
     localStorage.setItem('raceList',JSON.stringify(raceList));
+    updateStats();
 };
 
 displayName = (seatNum) => {
-    return `${raceList[regattaSelected]["races"][raceSelected]["people"][seatNum]["firstName"]}. ${raceList[regattaSelected]["races"][raceSelected]["people"][seatNum]["lastName"].charAt(0)} (${raceList[regattaSelected]["races"][raceSelected]["people"][seatNum]["weight"]}kg)`;
+    return `${peopleInRace()[seatNum]["firstName"]}. ${peopleInRace()[seatNum]["lastName"].charAt(0)} (${peopleInRace()[seatNum]["weight"]}kg)`;
 };
 
-/*peopleInRace = () => {
+peopleInRace = () => {
     return raceList[regattaSelected]["races"][raceSelected]["people"];
+}
+
+twoDecPlaces = (roundable) => {
+    return Math.round(roundable*100)/100
 }
 
 updateStats = () => {
     horiRadiI = (boatSize==20) ? ([300,330,350,350,350,350,350,350,330,300]) : ([300,330,350,330,300]);
     horiRadiInorm = horiRadiI.map((x) => x / 350);
-    vertRadiI = (boatSize==20) ? ([4.5,3.5,2.5,1.5,0.5,-0.5,-1.5,-2.5,-3.5,-4.5]) : ([3.5,1.75,0,-1.75,-3.5]);
-    vertRadiInorm = (boatSize==20) ? vertRadiI.map((x) => x / 4.5) : vertRadiI.map((x) => x / 3.5);
+    vertRadiI = (boatSize==20) ? ([6,4.5,3.5,2.5,1.5,0.5,-0.5,-1.5,-2.5,-3.5,-4.5,-6]) : ([4.5,3,1.5,0,-1.5,-3,-4.5]);
+    vertRadiInorm = (boatSize==20) ? vertRadiI.map((x) => x / 6) : vertRadiI.map((x) => x / 4.5);
     horiDiffs = [];
-    for (i=0;i<boatSize/2;i++) {
+    horiWeights = [];
+    horiWeights.push((peopleInRace()[1] === null) ? 0 : Number(peopleInRace()[1]["weight"])+14)
+    for (i=1;i<(boatSize/2)+1;i++) {
         p1 = (peopleInRace()[2*i] === null) ? 0 : Number(peopleInRace()[2*i]["weight"]);
         p2 = (peopleInRace()[2*i+1] === null) ? 0 : Number(peopleInRace()[2*i+1]["weight"]);
-        horiDiffs.push(p1 - p2);
+        horiDiffs.push(p2 - p1);
+        horiWeights.push(p1 + p2);
     };
+    horiWeights.push((peopleInRace()[0] === null) ? 0 : Number(peopleInRace()[0]["weight"])+7)
+
     weightedDiffs = [];
     for (i=0;i<boatSize/2;i++) {
         weightedDiffs.push(horiDiffs[i]*horiRadiInorm[i]);
     };
+    horiBal = weightedDiffs.reduce((a, a1) => a + a1, 0);
+
     vertWeightedDiffs = [];
-    for (i=0;i<boatSize/2;i++) {
-        vertWeightedDiffs.push(vertRadiInorm[i] * weightedDiffs[i]);
+    for (i=0;i<boatSize/2+2;i++) {
+        vertWeightedDiffs.push(vertRadiInorm[i] * horiWeights[i]);
     }
-    horiBal = weightedDiffs.reduce((a, a1, i) => a + a1, 0);
-}*/
+    vertBal = vertWeightedDiffs.reduce((a, a1) => a + a1, 0);
+
+    totalWeight = 0;
+    peopleCounted = 0;
+    for (i=2;i<boatSize+2;i++) {
+        if (!(peopleInRace()[i] === null)) {
+            totalWeight +=Number(peopleInRace()[i]['weight']);
+            peopleCounted += 1;
+        }
+    }
+    document.getElementById("statsOutput").innerHTML = '';
+
+    averageWeight = twoDecPlaces(totalWeight/(peopleCounted)) || 0;
+
+    document.getElementById("statsOutput").innerHTML += `<br>Total paddler weight: ${totalWeight}kg<br>`;
+    document.getElementById("statsOutput").innerHTML += `Average paddler weight: ${averageWeight}kg<br><br>`;
+
+    for (i=0;i<boatSize/2;i++) {
+        document.getElementById("statsOutput").innerHTML += `Row ${i+1} diff: ${twoDecPlaces(weightedDiffs[i])}kg<br>`;
+    }
+    document.getElementById("statsOutput").innerHTML += `<br>Right-left balance: ${twoDecPlaces(horiBal)}kg<br>`;
+    document.getElementById("statsOutput").innerHTML += `<br>Front-back balance: ${twoDecPlaces(vertBal)}kg<br>`;
+}
