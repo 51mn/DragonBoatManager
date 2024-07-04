@@ -22,21 +22,10 @@
     background-color: white;
     overflow: auto;
     border: 0.1rem solid black;
-
-}
-
-.box-box-box {
-    display: flex;
-    padding: 1rem;
-    font-size: 1.2rem;  
-    border-bottom: 0.1rem solid black;
-    justify-content: space-between;
-    cursor: pointer;
 }
 
 .regatta-btn {
     font-size: 1.5rem;
-    padding: 1rem;
     width: 12rem;
     text-align: center;
     color: #56a5eb;
@@ -89,18 +78,45 @@
     color: red;
     border:none;
     border-left: 0.1rem solid black;
+    border-bottom: 0.1rem solid black;
     cursor: pointer;
-    width: 3.4rem;
+    width: 3.5rem;
     font-size: 2rem;
-    margin:-1rem;
+    height: 100%;
 }
 
 .delete-button:hover {
     box-shadow: 0 0.2rem 1rem 0 rgba(86, 185, 235, 0.5);
 }
 
-@media only screen and (max-width:600px) {
+.box-box-box {
+    display: flex;
+    padding: 1rem;
+    font-size: 1.2rem;  
+    border-bottom: 0.1rem solid black;
+    cursor: pointer;
+    flex: 1;
+}
+
+.listItemHolder {
+    display: flex;
+    height: 3.5rem;
+}
+
+@media only screen and (max-width:550px) {
     .box-box-box {
         font-size: 3.25vw;
+        padding: 2.8vw;
+    }
+    .listItemHolder {
+        display: flex;
+        height: 10vw;
+    }
+    .delete-button {
+        width: 10vw;
+        font-size: 6vw;
+    }
+    .regatta-btn {
+        width: 40vw;
     }
 }

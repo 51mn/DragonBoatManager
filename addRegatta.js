@@ -5,19 +5,21 @@ document.addEventListener('keyup', () => {
 });
 
 regattaClicked = (e) => {
-    const regattaSelected = e.target.getAttribute("regattaSelected");
+    regattaSelected = e.target.getAttribute("regattaSelected");
+    console.log(regattaSelected);
     localStorage.setItem("regattaSelected", regattaSelected);
     window.location.assign("./races.html");
 };
 
 listRegattas = (i) => {
-    divNode = document.createElement("div");
-    document.getElementById('regattaList').appendChild(divNode); 
+    listItemHolder = document.getElementById('regattaList').appendChild(document.createElement("div"));
+    listItemHolder.classList.add('listItemHolder');
+    divNode = listItemHolder.appendChild(document.createElement("div")); 
     divNode.classList.add('box-box-box');
     divNode.setAttribute("onclick","regattaClicked(event)")
     divNode.textContent = raceList[i]["regatta"];
     divNode.setAttribute("regattaSelected",i);
-    deleteBtn = divNode.appendChild(document.createElement("button"));
+    deleteBtn = listItemHolder.appendChild(document.createElement("button"));
     deleteBtn.classList.add('delete-button');
     deleteBtn.setAttribute("onclick","deleteRegattaBtn(event)");
     deleteBtn.setAttribute("regattaNum",i);
@@ -29,7 +31,9 @@ deleteRegattaBtn = (e) => {
     raceList.splice(i,1);
     localStorage.setItem('raceList',JSON.stringify(raceList));
     e.target.parentElement.remove();
-    
+    for (i = 0; i < raceList.length; i++) {
+        document.getElementsByClassName('box-box-box')[i].setAttribute("regattaSelected",i);
+    }
 };
 
 onLoadFunction = () => {

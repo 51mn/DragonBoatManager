@@ -1,11 +1,12 @@
 table, th, td {
     border: 0.1rem solid black;
     border-collapse: collapse;
-    padding: 1rem;
+    padding: 0.9rem;
     background-color: white;
     margin-bottom: 2rem;
-    font-size: 1.1rem;
+    font-size: 1rem;
     min-width: 1.5rem;
+    align-items: center;
 }
 
 table {
@@ -124,6 +125,7 @@ input[type="radio"] {
     table, th, td {
         font-size: 3vw;
         min-width: 3vw;
+        padding: 3vw;
     }
     .deleteGuyBtn {
         font-size: 3vw;
@@ -135,13 +137,14 @@ input[type="radio"] {
     input[type="text"] {
         font-size: 1rem;
         padding: 1.25rem;
-        width:40vw;
+        width:30vw;
     }
     .input-container {
         width: 80vw;
     }
     .input-question-gender {
         font-size: 1rem;
+        padding-left: 3rem;
     }
     .checkmark {
         top: -0.5rem;

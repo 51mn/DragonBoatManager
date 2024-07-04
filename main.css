@@ -9,7 +9,7 @@
 }
 
 h1 {
-    font-size: 4rem;
+    font-size: 3rem;
     color: #376b98;
     margin-bottom: 1rem;
 }
@@ -98,6 +98,6 @@ a {
 
 @media only screen and (max-width:900px) {
     h1 {
-        font-size: 7vw;
+        font-size: 5.3vw;
     }
 }
