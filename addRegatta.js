@@ -6,7 +6,6 @@ document.addEventListener('keyup', () => {
 
 regattaClicked = (e) => {
     regattaSelected = e.target.getAttribute("regattaSelected");
-    console.log(regattaSelected);
     localStorage.setItem("regattaSelected", regattaSelected);
     window.location.assign("/DragonBoatManager/races.html");
 };

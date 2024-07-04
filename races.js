@@ -18,7 +18,6 @@ raceClicked = (e) => {
     const raceSelected = e.target.getAttribute("raceSelected");
     localStorage.setItem("raceSelected", raceSelected);
     window.location.assign("/DragonBoatManager/boat.html");
-    console.log(raceSelected);
 };
 
 listRaces = (i) => {
