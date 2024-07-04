@@ -141,9 +141,9 @@ updateStats = () => {
             peopleCounted += 1;
         }
     }
-    document.getElementById("statsOutput").innerHTML = '';
-
     averageWeight = twoDecPlaces(totalWeight/(peopleCounted)) || 0;
+
+    document.getElementById("statsOutput").innerHTML = '';
 
     document.getElementById("statsOutput").innerHTML += `<br>Total paddler weight: ${totalWeight}kg<br>`;
     document.getElementById("statsOutput").innerHTML += `Average paddler weight: ${averageWeight}kg<br><br>`;
