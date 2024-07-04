@@ -17,7 +17,7 @@ onLoadFunction = () => {
 raceClicked = (e) => {
     const raceSelected = e.target.getAttribute("raceSelected");
     localStorage.setItem("raceSelected", raceSelected);
-    window.location.assign("./boat.html");
+    window.location.assign("./boat");
     console.log(raceSelected);
 };
 
