@@ -8,7 +8,7 @@ regattaClicked = (e) => {
     regattaSelected = e.target.getAttribute("regattaSelected");
     console.log(regattaSelected);
     localStorage.setItem("regattaSelected", regattaSelected);
-    window.location.assign("./races");
+    window.location.assign("/DragonBoatManager/races.html");
 };
 
 listRegattas = (i) => {
