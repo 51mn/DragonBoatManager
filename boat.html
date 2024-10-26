@@ -11,8 +11,8 @@
 <body onload="boatOnLoad(event)">
     <div class="container">
         <div class="flex-center flex-column">
-            <h1>Dragon Boating Manager</h1>
-            <div class="hold-that-shit">
+            <h1>Dragon Boat Manager</h1>
+            <div class="biggie">
                 <div class="bigBoatContainer">
                     <div class="boatContainer" id="boatContainer"></div>
                     <div class="dANDs boatContainer" id="dANDsContainer">
@@ -20,9 +20,12 @@
                         <p>Drummer:</p>
                     </div>
                 </div>
-                <div class="statsContainer">
-                    <p style="font-weight:700">Stats</p>
-                    <p id="statsOutput"></p>
+                <div class="flex-column">
+                    <div class="statsContainer">
+                        <p style="font-weight:700">Stats</p>
+                        <p id="statsOutput"></p>
+                    </div>
+                    <button class="clearBoat" id="clearBoat">Clear Boat</button>
                 </div>
             </div>
         </div>

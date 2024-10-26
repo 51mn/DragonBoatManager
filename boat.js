@@ -154,3 +154,23 @@ updateStats = () => {
     document.getElementById("statsOutput").innerHTML += `<br>Right-left balance: ${twoDecPlaces(horiBal)}kg<br>`;
     document.getElementById("statsOutput").innerHTML += `<br>Front-back balance: ${twoDecPlaces(vertBal)}kg<br>`;
 }
+
+createRipple = (e) => {
+    button = e.currentTarget;
+    ripple = document.createElement("span");
+    ripple.classList.add("ripple"); 
+
+    rect = button.getBoundingClientRect();
+    ripple.style.left = `${e.clientX - rect.left}px`; // Adjusted for ripple center
+    ripple.style.top = `${e.clientY - rect.top}px`; // Adjusted for ripple center
+    button.appendChild(ripple);
+
+    peopleInRace().fill(null);
+    for (i = 0; i < boatSize+2; i++) {
+        document.getElementsByClassName('addPersonContainer')[i].firstChild.textContent="+";
+    }
+    localStorage.setItem('raceList',JSON.stringify(raceList));
+    updateStats();
+}
+
+document.getElementById('clearBoat').addEventListener('click', createRipple);
